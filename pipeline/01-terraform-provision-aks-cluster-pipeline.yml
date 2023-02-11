@@ -6,10 +6,10 @@ pool:
 
 # Define Variables for Environments
 variables:
+- name: DEV_ENVIRONMENT
+  value: dev
 - name: QA_ENVIRONMENT
-  value: qa
-- name: PROD_ENVIRONMENT
-  value: prod 
+  value: qa 
 
 # Stage-1: Terraform Validate Stage
 ## Step-1: Publish Artifacts to Pipeline (Pipeline artifacts provide a way to share files between stages in a pipeline or between different pipelines. )
@@ -61,8 +61,8 @@ stages:
 
 - stage: DeployAKSClusters
   jobs:
-    - deployment: DeployQAAKSCluster
-      displayName: DeployQAAKSCluster
+    - deployment: DeployDEVAKSCluster
+      displayName: DeployDEVAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
       environment: $(DEV_ENVIRONMENT)      

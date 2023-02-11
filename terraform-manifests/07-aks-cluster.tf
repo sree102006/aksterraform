@@ -33,7 +33,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 
 # Identity (System Assigned or Service Principal)
   identity { type = "SystemAssigned" }
-
+/*
 # Add On Profiles
   addon_profile {
     azure_policy { enabled = true }
@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.insights.id
     }
   }
-
+*/
 # RBAC and Azure AD Integration Block
 role_based_access_control {
   enabled = true

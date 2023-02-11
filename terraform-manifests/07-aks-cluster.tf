@@ -42,7 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
       log_analytics_workspace_id = azurerm_log_analytics_workspace.insights.id
     }
   }
-*/
+
 # RBAC and Azure AD Integration Block
 role_based_access_control {
   enabled = true
@@ -51,7 +51,7 @@ role_based_access_control {
     admin_group_object_ids = [azuread_group.aks_administrators.id]
   }
 }  
-
+*/
 # Windows Admin Profile
 windows_profile {
   admin_username            = var.windows_admin_username

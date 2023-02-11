@@ -51,7 +51,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           allowTelemetryCollection: false
 
-# Stage-2: Deploy Stages for QA & PROD
+# Stage-2: Deploy Stages for DEV & QA
 # Deployment-1: Deploy Dev AKS Cluster
 ## Step-1: Define Variables for environments
 ## Step-2: Download SSH Secure File
@@ -63,6 +63,7 @@ stages:
   jobs:
     - deployment: DeployDEVAKSCluster
       displayName: DeployDEVAKSCluster
+
       pool:
         vmImage: 'ubuntu-latest'
       environment: $(DEV_ENVIRONMENT)      
@@ -83,7 +84,7 @@ stages:
                 backendType: 'azurerm'
                 backendServiceArm: 'terraform-aks-azurerm-svc-con'
                 backendAzureRmResourceGroupName: 'terraform-storage-rg'
-                backendAzureRmStorageAccountName: 'terraformstatexlrwdrzs'
+                backendAzureRmStorageAccountName: 'terraformstateseeni'
                 backendAzureRmContainerName: 'tfstatefiles'
                 backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
                 allowTelemetryCollection: false

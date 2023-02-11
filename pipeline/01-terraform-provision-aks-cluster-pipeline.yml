@@ -1,15 +1,15 @@
 trigger:
-- master
+- main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 # Define Variables for Environments
 variables:
-- name: DEV_ENVIRONMENT
-  value: dev
 - name: QA_ENVIRONMENT
-  value: qa  
+  value: qa
+- name: PROD_ENVIRONMENT
+  value: prod 
 
 # Stage-1: Terraform Validate Stage
 ## Step-1: Publish Artifacts to Pipeline (Pipeline artifacts provide a way to share files between stages in a pipeline or between different pipelines. )
@@ -40,7 +40,7 @@ stages:
           backendType: 'azurerm'
           backendServiceArm: 'terraform-aks-azurerm-svc-con'
           backendAzureRmResourceGroupName: 'terraform-storage-rg'
-          backendAzureRmStorageAccountName: 'terraformstatexlrwdrzs'
+          backendAzureRmStorageAccountName: 'terraformstateseeni'
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
           allowTelemetryCollection: false
@@ -51,7 +51,7 @@ stages:
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           allowTelemetryCollection: false
 
-# Stage-2: Deploy Stages for Dev & QA
+# Stage-2: Deploy Stages for QA & PROD
 # Deployment-1: Deploy Dev AKS Cluster
 ## Step-1: Define Variables for environments
 ## Step-2: Download SSH Secure File
@@ -61,8 +61,8 @@ stages:
 
 - stage: DeployAKSClusters
   jobs:
-    - deployment: DeployDevAKSCluster
-      displayName: DeployDevAKSCluster
+    - deployment: DeployQAAKSCluster
+      displayName: DeployQAAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
       environment: $(DEV_ENVIRONMENT)      
